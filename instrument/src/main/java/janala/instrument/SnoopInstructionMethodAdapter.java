@@ -124,54 +124,54 @@ public class SnoopInstructionMethodAdapter extends MethodVisitor implements Opco
     public void visitVarInsn(int opcode, int var) {
         switch (opcode) {
             case ILOAD:
-                addInvokeLogMethod(mv);
+
                 addVarInsn(mv, var, "ILOAD", opcode);
                 addValueReadInsn(mv, "I", "GETVALUE_");
                 break;
             case LLOAD:
-                addInvokeLogMethod(mv);
+
                 addVarInsn(mv, var, "LLOAD", opcode);
                 addValueReadInsn(mv, "J", "GETVALUE_");
                 break;
             case FLOAD:
-                addInvokeLogMethod(mv);
+
                 addVarInsn(mv, var, "FLOAD", opcode);
                 addValueReadInsn(mv, "F", "GETVALUE_");
                 break;
             case DLOAD:
-                addInvokeLogMethod(mv);
+
                 addVarInsn(mv, var, "DLOAD", opcode);
                 addValueReadInsn(mv, "D", "GETVALUE_");
                 break;
             case ALOAD:
-                addInvokeLogMethod(mv);
+
                 addVarInsn(mv, var, "ALOAD", opcode);
                 if (!(var == 0 && isInit && !isSuperInitCalled)) {
                     addValueReadInsn(mv, "Ljava/lang/Object;", "GETVALUE_");
                 }
                 break;
             case ISTORE:
-                addInvokeLogMethod(mv);
+
                 addVarInsn(mv, var, "ISTORE", opcode);
                 break;
             case LSTORE:
-                addInvokeLogMethod(mv);
+
                 addVarInsn(mv, var, "LSTORE", opcode);
                 break;
             case FSTORE:
-                addInvokeLogMethod(mv);
+
                 addVarInsn(mv, var, "FSTORE", opcode);
                 break;
             case DSTORE:
-                addInvokeLogMethod(mv);
+
                 addVarInsn(mv, var, "DSTORE", opcode);
                 break;
             case ASTORE:
-                addInvokeLogMethod(mv);
+
                 addVarInsn(mv, var, "ASTORE", opcode);
                 break;
             case RET:
-                addInvokeLogMethod(mv);
+
                 addVarInsn(mv, var, "RET", opcode);
                 break;
             default:
@@ -183,162 +183,131 @@ public class SnoopInstructionMethodAdapter extends MethodVisitor implements Opco
     public void visitInsn(int opcode) {
         //System.out.println(opcode);
         switch (opcode) {
-            case NOP:
-                addInsn(mv, "NOP", opcode);
-                break;
-            case ACONST_NULL:
-                addInsn(mv, "LOG", opcode);
-                // addInsn(mv, "ACONST_NULL", opcode);
-                break;
-            case ICONST_M1:
-                //addInsn(mv, "ICONST_M1", opcode);
-                addInsn(mv, "LOG", opcode);
-                break;
-            case ICONST_0:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "ICONST_0", opcode);
-                break;
-            case ICONST_1:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "ICONST_1", opcode);
-
-                break;
-            case ICONST_2:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "ICONST_2", opcode);
-                break;
-            case ICONST_3:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "ICONST_3", opcode);
-                break;
-            case ICONST_4:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "ICONST_4", opcode);
-                break;
-            case ICONST_5:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "ICONST_5", opcode);
-                break;
-            case LCONST_0:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LCONST_0", opcode);
-                break;
-            case LCONST_1:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LCONST_1", opcode);
-                break;
-            case FCONST_0:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "FCONST_0", opcode);
-                break;
-            case FCONST_1:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "FCONST_1", opcode);
-                break;
-            case FCONST_2:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "FCONST_2", opcode);
-                break;
-            case DCONST_0:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "DCONST_0", opcode);
-                break;
-            case DCONST_1:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "DCONST_1", opcode);
-                break;
-
-
-//            /*
-
-            case IALOAD:
-                addInsn(mv, "LOG", opcode);
-                //addInsn(mv, "IALOAD", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                addValueReadInsn(mv, "I", "GETVALUE_");
-                break;
-            case LALOAD:
-                addInsn(mv, "LOG", opcode);
-                //addInsn(mv, "LALOAD", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                addValueReadInsn(mv, "J", "GETVALUE_");
-                break;
-            case FALOAD:
-                addInsn(mv, "LOG", opcode);
-                //addInsn(mv, "FALOAD", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                addValueReadInsn(mv, "F", "GETVALUE_");
-                break;
-            case DALOAD:
-                addInsn(mv, "LOG", opcode);
-                //addInsn(mv, "DALOAD", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                addValueReadInsn(mv, "D", "GETVALUE_");
-                break;
-            case AALOAD:
-                addInsn(mv, "LOG", opcode);
-                //addInsn(mv, "AALOAD", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                addValueReadInsn(mv, "Ljava/lang/Object;", "GETVALUE_");
-                break;
-            case BALOAD:
-                addInsn(mv, "LOG", opcode);
-                //addInsn(mv, "BALOAD", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                addValueReadInsn(mv, "B", "GETVALUE_");
-                break;
-            case CALOAD:
-                addInsn(mv, "LOG", opcode);
-                //addInsn(mv, "CALOAD", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                addValueReadInsn(mv, "C", "GETVALUE_");
-                break;
-            case SALOAD:
-                addInsn(mv, "LOG", opcode);
-                //addInsn(mv, "SALOAD", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                addValueReadInsn(mv, "S", "GETVALUE_");
-                break;
-            case IASTORE:
-                addInsn(mv, "LOG", opcode);
-                //addInsn(mv, "IASTORE", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                break;
-            case LASTORE:
-                addInsn(mv, "LOG", opcode);
-                //addInsn(mv, "LASTORE", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                break;
-            case FASTORE:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "FASTORE", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                break;
-            case DASTORE:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "DASTORE", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                break;
-            case AASTORE:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "AASTORE", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                break;
-            case BASTORE:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "BASTORE", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                break;
-            case CASTORE:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "CASTORE", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                break;
-            case SASTORE:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "SASTORE", opcode);
-                addSpecialInsn(mv, 0); // for non-exceptional path
-                break;
+//            case NOP:
+//                addInsn(mv, "NOP", opcode);
+//                break;
+//            case ACONST_NULL:
+//                // addInsn(mv, "ACONST_NULL", opcode);
+//                break;
+//            case ICONST_M1:
+//                //addInsn(mv, "ICONST_M1", opcode);
+//                break;
+//            case ICONST_0:
+////        addInsn(mv, "ICONST_0", opcode);
+//                break;
+//            case ICONST_1:
+////        addInsn(mv, "ICONST_1", opcode);
+//
+//                break;
+//            case ICONST_2:
+////        addInsn(mv, "ICONST_2", opcode);
+//                break;
+//            case ICONST_3:
+////        addInsn(mv, "ICONST_3", opcode);
+//                break;
+//            case ICONST_4:
+////        addInsn(mv, "ICONST_4", opcode);
+//                break;
+//            case ICONST_5:
+////        addInsn(mv, "ICONST_5", opcode);
+//                break;
+//            case LCONST_0:
+////        addInsn(mv, "LCONST_0", opcode);
+//                break;
+//            case LCONST_1:
+////        addInsn(mv, "LCONST_1", opcode);
+//                break;
+//            case FCONST_0:
+////        addInsn(mv, "FCONST_0", opcode);
+//                break;
+//            case FCONST_1:
+////        addInsn(mv, "FCONST_1", opcode);
+//                break;
+//            case FCONST_2:
+////        addInsn(mv, "FCONST_2", opcode);
+//                break;
+//            case DCONST_0:
+////        addInsn(mv, "DCONST_0", opcode);
+//                break;
+//            case DCONST_1:
+////        addInsn(mv, "DCONST_1", opcode);
+//                break;
+//
+//
+////            /*
+//
+//            case IALOAD:
+//                //addInsn(mv, "IALOAD", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                addValueReadInsn(mv, "I", "GETVALUE_");
+//                break;
+//            case LALOAD:
+//                //addInsn(mv, "LALOAD", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                addValueReadInsn(mv, "J", "GETVALUE_");
+//                break;
+//            case FALOAD:
+//                //addInsn(mv, "FALOAD", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                addValueReadInsn(mv, "F", "GETVALUE_");
+//                break;
+//            case DALOAD:
+//                //addInsn(mv, "DALOAD", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                addValueReadInsn(mv, "D", "GETVALUE_");
+//                break;
+//            case AALOAD:
+//                //addInsn(mv, "AALOAD", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                addValueReadInsn(mv, "Ljava/lang/Object;", "GETVALUE_");
+//                break;
+//            case BALOAD:
+//                //addInsn(mv, "BALOAD", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                addValueReadInsn(mv, "B", "GETVALUE_");
+//                break;
+//            case CALOAD:
+//                //addInsn(mv, "CALOAD", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                addValueReadInsn(mv, "C", "GETVALUE_");
+//                break;
+//            case SALOAD:
+//                //addInsn(mv, "SALOAD", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                addValueReadInsn(mv, "S", "GETVALUE_");
+//                break;
+//            case IASTORE:
+//                //addInsn(mv, "IASTORE", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                break;
+//            case LASTORE:
+//                //addInsn(mv, "LASTORE", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                break;
+//            case FASTORE:
+////        addInsn(mv, "FASTORE", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                break;
+//            case DASTORE:
+////        addInsn(mv, "DASTORE", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                break;
+//            case AASTORE:
+////        addInsn(mv, "AASTORE", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                break;
+//            case BASTORE:
+////        addInsn(mv, "BASTORE", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                break;
+//            case CASTORE:
+////        addInsn(mv, "CASTORE", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                break;
+//            case SASTORE:
+////        addInsn(mv, "SASTORE", opcode);
+//                addSpecialInsn(mv, 0); // for non-exceptional path
+//                break;
 //      case POP:
 //          System.out.println("POP not handled");
 //        //addInsn(mv, "POP", opcode);
@@ -375,278 +344,256 @@ public class SnoopInstructionMethodAdapter extends MethodVisitor implements Opco
 //          System.out.println("SWAP not handled");
 //        //addInsn(mv, "SWAP", opcode);
 //        break;
-            case IADD:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "IADD", opcode);
-                break;
-            case LADD:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LADD", opcode);
-                break;
-            case FADD:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "FADD", opcode);
-                break;
-            case DADD:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "DADD", opcode);
-                break;
-            case ISUB:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "ISUB", opcode);
-                break;
-            case LSUB:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LSUB", opcode);
-                break;
-            case FSUB:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "FSUB", opcode);
-                break;
-            case DSUB:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "DSUB", opcode);
-                break;
-            case IMUL:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "IMUL", opcode);
-                break;
-            case LMUL:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LMUL", opcode);
-                break;
-            case FMUL:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "FMUL", opcode);
-                break;
-            case DMUL:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "DMUL", opcode);
-                break;
-            case IDIV:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "IDIV", opcode);
-//                addSpecialInsn(mv, 0); // for non-exceptional path
-                break;
-            case LDIV:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LDIV", opcode);
-//                addSpecialInsn(mv, 0); // for non-exceptional path
-                break;
-            case FDIV:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "FDIV", opcode);
-                break;
-            case DDIV:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "DDIV", opcode);
-                break;
-            case IREM:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "IREM", opcode);
-//                addSpecialInsn(mv, 0); // for non-exceptional path
-                break;
-            case LREM:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LREM", opcode);
-//                addSpecialInsn(mv, 0); // for non-exceptional path
-                break;
-            case FREM:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "FREM", opcode);
-                break;
-            case DREM:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "DREM", opcode);
-                break;
-            case INEG:
-//                addInsn(mv, "LOG", opcode);
-                addInvokeLogMethod(mv);
-//        addInsn(mv, "INEG", opcode);
-                break;
-            case LNEG:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LNEG", opcode);
-                break;
-            case FNEG:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "FNEG", opcode);
-                break;
-            case DNEG:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "DNEG", opcode);
-                break;
-            case ISHL:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "ISHL", opcode);
-                break;
-            case LSHL:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LSHL", opcode);
-                break;
-            case ISHR:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "ISHR", opcode);
-                break;
-            case LSHR:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LSHR", opcode);
-                break;
-            case IUSHR:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "IUSHR", opcode);
-                break;
-            case LUSHR:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LUSHR", opcode);
-                break;
-            case IAND:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "IAND", opcode);
-                break;
-            case LAND:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LAND", opcode);
-                break;
-            case IOR:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "IOR", opcode);
-                break;
-            case LOR:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LOR", opcode);
-                break;
-            case IXOR:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "IXOR", opcode);
-                break;
-            case LXOR:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LXOR", opcode);
-                break;
-            case I2L:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "I2L", opcode);
-                break;
-            case I2F:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "I2F", opcode);
-                break;
-            case I2D:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "I2D", opcode);
-                break;
-            case L2I:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "L2I", opcode);
-                break;
-            case L2F:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "L2F", opcode);
-                break;
-            case L2D:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "L2D", opcode);
-                break;
-            case F2I:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "F2I", opcode);
-                break;
-            case F2L:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "F2L", opcode);
-                break;
-            case F2D:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "F2D", opcode);
-                break;
-            case D2I:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "D2I", opcode);
-                break;
-            case D2L:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "D2L", opcode);
-                break;
-            case D2F:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "D2F", opcode);
-                break;
-            case I2B:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "I2B", opcode);
-                break;
-            case I2C:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "I2C", opcode);
-                break;
-            case I2S:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "I2S", opcode);
-                break;
-            case LCMP:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "LCMP", opcode);
-                break;
-            case FCMPL:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "FCMPL", opcode);
-                break;
-            case FCMPG:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "FCMPG", opcode);
-                break;
-            case DCMPL:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "DCMPL", opcode);
-                break;
-            case DCMPG:
-                addInsn(mv, "LOG", opcode);
-//        addInsn(mv, "DCMPG", opcode);
-                break;
-//        */
+//            case IADD:
+////        addInsn(mv, "IADD", opcode);
+//                break;
+//            case LADD:
+////        addInsn(mv, "LADD", opcode);
+//                break;
+//            case FADD:
+////        addInsn(mv, "FADD", opcode);
+//                break;
+//            case DADD:
+////        addInsn(mv, "DADD", opcode);
+//                break;
+//            case ISUB:
+////        addInsn(mv, "ISUB", opcode);
+//                break;
+//            case LSUB:
+////        addInsn(mv, "LSUB", opcode);
+//                break;
+//            case FSUB:
+////        addInsn(mv, "FSUB", opcode);
+//                break;
+//            case DSUB:
+////        addInsn(mv, "DSUB", opcode);
+//                break;
+//            case IMUL:
+////        addInsn(mv, "IMUL", opcode);
+//                break;
+//            case LMUL:
+////        addInsn(mv, "LMUL", opcode);
+//                break;
+//            case FMUL:
+////        addInsn(mv, "FMUL", opcode);
+//                break;
+//            case DMUL:
+////        addInsn(mv, "DMUL", opcode);
+//                break;
+//            case IDIV:
+////        addInsn(mv, "IDIV", opcode);
+////                addSpecialInsn(mv, 0); // for non-exceptional path
+//                break;
+//            case LDIV:
+////        addInsn(mv, "LDIV", opcode);
+////                addSpecialInsn(mv, 0); // for non-exceptional path
+//                break;
+//            case FDIV:
+////        addInsn(mv, "FDIV", opcode);
+//                break;
+//            case DDIV:
+//
+////        addInsn(mv, "DDIV", opcode);
+//                break;
+//            case IREM:
+//
+////        addInsn(mv, "IREM", opcode);
+////                addSpecialInsn(mv, 0); // for non-exceptional path
+//                break;
+//            case LREM:
+//
+////        addInsn(mv, "LREM", opcode);
+////                addSpecialInsn(mv, 0); // for non-exceptional path
+//                break;
+//            case FREM:
+//
+////        addInsn(mv, "FREM", opcode);
+//                break;
+//            case DREM:
+//
+////        addInsn(mv, "DREM", opcode);
+//                break;
+//            case INEG:
+////
+////        addInsn(mv, "INEG", opcode);
+//                break;
+//            case LNEG:
+//
+////        addInsn(mv, "LNEG", opcode);
+//                break;
+//            case FNEG:
+//
+////        addInsn(mv, "FNEG", opcode);
+//                break;
+//            case DNEG:
+//
+////        addInsn(mv, "DNEG", opcode);
+//                break;
+//            case ISHL:
+//
+////        addInsn(mv, "ISHL", opcode);
+//                break;
+//            case LSHL:
+//
+////        addInsn(mv, "LSHL", opcode);
+//                break;
+//            case ISHR:
+//
+////        addInsn(mv, "ISHR", opcode);
+//                break;
+//            case LSHR:
+//
+////        addInsn(mv, "LSHR", opcode);
+//                break;
+//            case IUSHR:
+//
+////        addInsn(mv, "IUSHR", opcode);
+//                break;
+//            case LUSHR:
+//
+////        addInsn(mv, "LUSHR", opcode);
+//                break;
+//            case IAND:
+//
+////        addInsn(mv, "IAND", opcode);
+//                break;
+//            case LAND:
+//
+////        addInsn(mv, "LAND", opcode);
+//                break;
+//            case IOR:
+//
+////        addInsn(mv, "IOR", opcode);
+//                break;
+//            case LOR:
+//
+////        addInsn(mv, "LOR", opcode);
+//                break;
+//            case IXOR:
+//
+////        addInsn(mv, "IXOR", opcode);
+//                break;
+//            case LXOR:
+//
+////        addInsn(mv, "LXOR", opcode);
+//                break;
+//            case I2L:
+//
+////        addInsn(mv, "I2L", opcode);
+//                break;
+//            case I2F:
+//
+////        addInsn(mv, "I2F", opcode);
+//                break;
+//            case I2D:
+//
+////        addInsn(mv, "I2D", opcode);
+//                break;
+//            case L2I:
+//
+////        addInsn(mv, "L2I", opcode);
+//                break;
+//            case L2F:
+//
+////        addInsn(mv, "L2F", opcode);
+//                break;
+//            case L2D:
+//
+////        addInsn(mv, "L2D", opcode);
+//                break;
+//            case F2I:
+//
+////        addInsn(mv, "F2I", opcode);
+//                break;
+//            case F2L:
+//
+////        addInsn(mv, "F2L", opcode);
+//                break;
+//            case F2D:
+//
+////        addInsn(mv, "F2D", opcode);
+//                break;
+//            case D2I:
+//
+////        addInsn(mv, "D2I", opcode);
+//                break;
+//            case D2L:
+//
+////        addInsn(mv, "D2L", opcode);
+//                break;
+//            case D2F:
+//
+////        addInsn(mv, "D2F", opcode);
+//                break;
+//            case I2B:
+//
+////        addInsn(mv, "I2B", opcode);
+//                break;
+//            case I2C:
+//
+////        addInsn(mv, "I2C", opcode);
+//                break;
+//            case I2S:
+//
+////        addInsn(mv, "I2S", opcode);
+//                break;
+//            case LCMP:
+//
+////        addInsn(mv, "LCMP", opcode);
+//                break;
+//            case FCMPL:
+//
+////        addInsn(mv, "FCMPL", opcode);
+//                break;
+//            case FCMPG:
+//
+////        addInsn(mv, "FCMPG", opcode);
+//                break;
+//            case DCMPL:
+//
+////        addInsn(mv, "DCMPL", opcode);
+//                break;
+//            case DCMPG:
+//
+////        addInsn(mv, "DCMPG", opcode);
+//                break;
+////        */
             case IRETURN:
-                addInvokeLogMethod(mv);
                 addInsn(mv, "IRETURN", opcode);
                 break;
             case LRETURN:
-                addInvokeLogMethod(mv);
                 addInsn(mv, "LRETURN", opcode);
                 break;
             case FRETURN:
-                addInvokeLogMethod(mv);
                 addInsn(mv, "FRETURN", opcode);
                 break;
             case DRETURN:
-                addInvokeLogMethod(mv);
                 addInsn(mv, "DRETURN", opcode);
                 break;
             case ARETURN:
-                addInvokeLogMethod(mv);
                 addInsn(mv, "ARETURN", opcode);
                 break;
             case RETURN:
-                addInvokeLogMethod(mv);
                 addInsn(mv, "RETURN", opcode);
                 break;
-      /*case ARRAYLENGTH:
-        addInsn(mv, "ARRAYLENGTH", opcode);
-        addSpecialInsn(mv, 0); // for non-exceptional path
-        addValueReadInsn(mv, "I", "GETVALUE_");
-        break;
-      case ATHROW:
-        addInsn(mv, "ATHROW", opcode);
-        break;
-
-       */
-
+//      case ARRAYLENGTH:
+////        addInsn(mv, "ARRAYLENGTH", opcode);
+////        addSpecialInsn(mv, 0); // for non-exceptional path
+////        addValueReadInsn(mv, "I", "GETVALUE_");
+//        break;
+//      case ATHROW:
+////        addInsn(mv, "ATHROW", opcode);
+//        break;
+//
+//
+//
 //      case MONITORENTER:
-//        addInsn(mv, "MONITORENTER", opcode);
-//        addSpecialInsn(mv, 0); // for non-exceptional path
+////        addInsn(mv, "MONITORENTER", opcode);
+////        addSpecialInsn(mv, 0); // for non-exceptional path
 //        break;
 //      case MONITOREXIT:
-//        addInsn(mv, "MONITOREXIT", opcode);
-//        addSpecialInsn(mv, 0); // for non-exceptional path
+////        addInsn(mv, "MONITOREXIT", opcode);
+////        addSpecialInsn(mv, 0); // for non-exceptional path
 //        break;
 
 
@@ -675,16 +622,15 @@ public class SnoopInstructionMethodAdapter extends MethodVisitor implements Opco
     @Override
     public void visitIntInsn(int opcode, int operand) {
         switch (opcode) {
-      /*
-      case BIPUSH:
-        addBipushInsn(mv, operand);
-        mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "BIPUSH", "(III)V", false);
-        break;
-      case SIPUSH:
-        addBipushInsn(mv, operand);
-        mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "SIPUSH", "(III)V", false);
-        break;
-       */
+
+//      case BIPUSH:
+//        addBipushInsn(mv, operand);
+//        mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "BIPUSH", "(III)V", false);
+//        break;
+//      case SIPUSH:
+//        addBipushInsn(mv, operand);
+//        mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "SIPUSH", "(III)V", false);
+//        break;
             case NEWARRAY:
                 if (Config.instance.instrumentAlloc) {
                     // First, log the array size
@@ -836,7 +782,6 @@ public class SnoopInstructionMethodAdapter extends MethodVisitor implements Opco
     }
 
     private void addMethodWithTryCatch(int opcode, String owner, String name, String desc, boolean itf) {
-        addInvokeLogMethod(mv);
         addBipushInsn(mv, instrumentationState.incAndGetId());
         addBipushInsn(mv, lastLineNumber);
 
@@ -962,12 +907,10 @@ public class SnoopInstructionMethodAdapter extends MethodVisitor implements Opco
             }
             addMethodWithTryCatch(opcode, owner, name, desc, itf);
         }
-        addInvokeLogMethod(mv);
     }
 
     private void addConditionalJumpInstrumentation(int opcode, Label finalBranchTarget,
                                                    String instMethodName, String instMethodDesc) {
-        addInvokeLogMethod(mv);
         int iid = instrumentationState.incAndGetId();
         Label intermediateBranchTarget = new Label();
         Label fallthrough = new Label();
@@ -1001,40 +944,38 @@ public class SnoopInstructionMethodAdapter extends MethodVisitor implements Opco
         // continue with fall-through code visiting
     }
 
+    //    @Override
+//    public void visitLdcInsn(Object cst) {
+//        addBipushInsn(mv, instrumentationState.incAndGetId());
+//        addBipushInsn(mv, lastLineNumber);
+//        mv.visitLdcInsn(cst);
+//        if (cst instanceof Integer) {
+//            mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "LDC", "(III)V", false);
+//        } else if (cst instanceof Long) {
+//            mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "LDC", "(IIJ)V", false);
+//        } else if (cst instanceof Float) {
+//            mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "LDC", "(IIF)V", false);
+//        } else if (cst instanceof Double) {
+//            mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "LDC", "(IID)V", false);
+//        } else if (cst instanceof String) {
+//            mv.visitMethodInsn(
+//                    INVOKESTATIC, Config.instance.analysisClass, "LDC", "(IILjava/lang/String;)V", false);
+//        } else {
+//            mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass,
+//                    "LDC", "(IILjava/lang/Object;)V", false);
+//        }
+//        mv.visitLdcInsn(cst);
+//    }
+//
     @Override
-    public void visitLdcInsn(Object cst) {
-        // addInvokeLogMethod(mv);
+    public void visitIincInsn(int var, int increment) {
         addBipushInsn(mv, instrumentationState.incAndGetId());
         addBipushInsn(mv, lastLineNumber);
-        mv.visitLdcInsn(cst);
-        if (cst instanceof Integer) {
-            mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "LDC", "(III)V", false);
-        } else if (cst instanceof Long) {
-            mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "LDC", "(IIJ)V", false);
-        } else if (cst instanceof Float) {
-            mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "LDC", "(IIF)V", false);
-        } else if (cst instanceof Double) {
-            mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "LDC", "(IID)V", false);
-        } else if (cst instanceof String) {
-            mv.visitMethodInsn(
-                    INVOKESTATIC, Config.instance.analysisClass, "LDC", "(IILjava/lang/String;)V", false);
-        } else {
-            mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass,
-                    "LDC", "(IILjava/lang/Object;)V", false);
-        }
-        mv.visitLdcInsn(cst);
+        addBipushInsn(mv, var);
+        addBipushInsn(mv, increment);
+        mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "IINC", "(IIII)V", false);
+        mv.visitIincInsn(var, increment);
     }
-
-  @Override
-  public void visitIincInsn(int var, int increment) {
-        addInvokeLogMethod(mv);
-    addBipushInsn(mv, instrumentationState.incAndGetId());
-    addBipushInsn(mv, lastLineNumber);
-    addBipushInsn(mv, var);
-    addBipushInsn(mv, increment);
-    mv.visitMethodInsn(INVOKESTATIC, Config.instance.analysisClass, "IINC", "(IIII)V", false);
-    mv.visitIincInsn(var, increment);
-  }
 
     @Override
     public void visitJumpInsn(int opcode, Label label) {
@@ -1042,7 +983,6 @@ public class SnoopInstructionMethodAdapter extends MethodVisitor implements Opco
 //            // Jumps in a constructor before super() or this() mess up the analysis
 //            throw new RuntimeException("Cannot handle jumps before super/this");
 //        }
-//        addInvokeLogMethod(mv);
         switch (opcode) {
             case IFEQ:
                 addConditionalJumpInstrumentation(opcode, label, "IFEQ", "(III)V");
@@ -1117,7 +1057,6 @@ public class SnoopInstructionMethodAdapter extends MethodVisitor implements Opco
     @Override
     public void visitTableSwitchInsn(int min, int max, Label dflt, Label... labels) {
         // Save operand value
-        addInvokeLogMethod(mv);
         addValueReadInsn(mv, "I", "GETVALUE_");
         // Log switch instruction
         addBipushInsn(mv, instrumentationState.incAndGetId());
@@ -1142,7 +1081,6 @@ public class SnoopInstructionMethodAdapter extends MethodVisitor implements Opco
     @Override
     public void visitLookupSwitchInsn(Label dflt, int[] keys, Label[] labels) {
         // Save operand value
-        addInvokeLogMethod(mv);
         addValueReadInsn(mv, "I", "GETVALUE_");
         // Log switch instruction
         addBipushInsn(mv, instrumentationState.incAndGetId());

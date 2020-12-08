@@ -2,9 +2,9 @@ package janala.instrument;
 
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
 
 public class SnoopInstructionMethodAdapterForFL extends SnoopInstructionMethodAdapter {
+
 
     public SnoopInstructionMethodAdapterForFL(MethodVisitor mv, String className,
                                               String methodName, String descriptor, String superName,
@@ -23,12 +23,12 @@ public class SnoopInstructionMethodAdapterForFL extends SnoopInstructionMethodAd
         super.visitJumpInsn(opcode, label);
     }
 
-    @Override
-    public void visitLdcInsn(Object cst) {
-        addInvokeLogMethod(mv);
-        super.visitLdcInsn(cst);
-    }
-
+    //    @Override
+//    public void visitLdcInsn(Object cst) {
+//        //addInvokeLogMethod(mv);
+//        super.visitLdcInsn(cst);
+//    }
+//
     @Override
     public void visitIincInsn(int var, int increment) {
         addInvokeLogMethod(mv);
@@ -46,20 +46,20 @@ public class SnoopInstructionMethodAdapterForFL extends SnoopInstructionMethodAd
     public void visitInsn(int opcode) {
         switch (opcode) {
             case ACONST_NULL:
-            case ICONST_M1:
-            case ICONST_0:
-            case ICONST_1:
-            case ICONST_2:
-            case ICONST_3:
-            case ICONST_4:
-            case ICONST_5:
+//            case ICONST_M1:
+//            case ICONST_0:
+//            case ICONST_1:
+//            case ICONST_2:
+//            case ICONST_3:
+//            case ICONST_4:
+//            case ICONST_5:
             case LCONST_0:
             case LCONST_1:
             case FCONST_0:
             case FCONST_1:
             case FCONST_2:
-            case DCONST_0:
-            case DCONST_1:
+//            case DCONST_0:
+//            case DCONST_1:
             case IALOAD:
             case LALOAD:
             case FALOAD:
@@ -71,8 +71,8 @@ public class SnoopInstructionMethodAdapterForFL extends SnoopInstructionMethodAd
             case IASTORE:
             case LASTORE:
             case FASTORE:
-            case DASTORE:
-            case AASTORE:
+//            case DASTORE:
+//            case AASTORE:
             case BASTORE:
             case CASTORE:
             case SASTORE:
@@ -137,8 +137,8 @@ public class SnoopInstructionMethodAdapterForFL extends SnoopInstructionMethodAd
             case FRETURN:
             case DRETURN:
             case ARETURN:
-            case RETURN:
-            addInvokeLogMethod(mv);
+//            case RETURN:
+                addInvokeLogMethod(mv);
             default:
                 mv.visitInsn(opcode); // Don't instrument other instructions
         }
