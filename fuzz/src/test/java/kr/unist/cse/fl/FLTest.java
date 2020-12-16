@@ -5,6 +5,7 @@ import kr.unist.cse.fl.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class FLTest {
         // Comment out the following to save instrumented class files to the disk
         //System.setProperty("janala.instrumentationCacheDir", projectRoot+"");
         LocalizerCLI.main(new String[] {
-                projectRoot + "/target/test-classes:" + projectRoot + "/target/classes",
+                projectRoot + "/target/test-classes" + File.pathSeparator + projectRoot + "/target/classes",
                 "--formula",
                 "Tarantula", // formula
                 "org.apache.commons.math3.util.MathArraysTest"
