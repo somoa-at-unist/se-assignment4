@@ -28,7 +28,6 @@ public class FLTest {
                 "examples.simple.ExampleClassTest:test1",
                 "examples.simple.ExampleClassTest:test2"
                 });
-        System.exit(0);
     }
 
     @Test
@@ -44,7 +43,6 @@ public class FLTest {
                 "Tarantula", // formula
                 "org.apache.commons.math3.util.MathArraysTest"
         });
-        System.exit(0);
     }
 
 }
